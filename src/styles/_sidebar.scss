@@ -1,0 +1,138 @@
+.sidebar {
+    background-color: black;
+    color: white;
+    // min-width: 15rem;
+    padding: 1rem .7rem;
+    font-weight: bold;
+    grid-column: sidebar-start / sidebar-end;
+    grid-row: 1 / span 2;
+    height: 100%;
+    
+}
+.logo {
+    width: 2.4rem;
+    height: 3rem;
+}
+.logo-holder {
+    padding: .4rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+.sans {
+    font-family: 'Work Sans', sans-serif;
+
+}
+.title-logo {
+    font-size: 1.5rem;
+    line-height: 2;
+  
+}
+.r {
+    position: absolute;
+    top: 2.4rem;
+    font-size: .4rem;
+}
+.basic-list {
+    padding: 1rem 0;
+    list-style: none;
+
+    li {
+        fill: white;
+      
+    }
+  
+    a {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #b3b3b3;
+        font-weight: 600;
+        font-size: .9rem;
+        padding: .5rem 1rem;
+        border-radius: 5px;
+        transition: all .4s;
+        &:hover {
+            color: white;
+        }
+        &.active {
+            background-color:#282828;
+            color: white;
+        }
+    }
+    
+}
+.playlist {
+    margin: .2rem 1rem;
+    border-bottom: 1px solid #202020;
+    h5 {
+        margin-bottom: 1.2rem;
+        color: #b3b3b3;
+        letter-spacing: 2px;
+    }
+    li {
+       list-style: none;
+       margin-bottom: .7rem;
+   
+    }
+    a {
+        text-decoration: none;
+        color: #b3b3b3;
+        display: flex;
+       align-items: center;
+       gap: 1rem;
+       font-size: .9rem;
+       transition: all .2s ease;
+     
+       
+       &.active {
+           color: white;
+       }
+       &:hover {
+           color:white;
+       }
+       &:hover .icon-wrapper  {
+           background-color: white;
+       }
+       &:hover .gradient  {
+        background-image: linear-gradient(to bottom right , #21096a,#999999);
+       svg {
+        fill:white;
+       }
+        
+    }
+    }
+}
+.icon {
+    color: white;
+}
+.txt-center {
+    text-align: center;
+}
+.playlist-icon {
+    width: 1.6rem;
+    height: 1.5rem;
+    fill: black;
+    font-weight: bold;
+}
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: #b3b3b3;
+    svg {
+        fill: black;
+    }
+    
+}
+.gradient {
+    background-image: linear-gradient(to bottom right , #21096a,#7d929a);
+  
+    svg {
+        fill: #b3b3b3;
+    }
+}
