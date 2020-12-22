@@ -8,7 +8,6 @@ function dashboard () {
         <div className="dashboard">
             <Sidebar/>
             <MainView/>
-            <ScreenPlayer />
         </div>
     )
 }

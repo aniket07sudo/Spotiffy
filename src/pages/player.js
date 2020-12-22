@@ -3,26 +3,22 @@ import {connect} from 'react-redux';
 import {setCurrentTime} from '../store/actions/track';
 
 function Player(props) {
-
+    const volumeRef = useRef(null);
     const dragHandler = (e) =>{ 
         props.audref.current.currentTime = e.target.value;
         props.setTime(e.target.value);
     }
 
     const volumeHandler = (e) => {
-        console.log(e.target.value);
-        props.audref.current.volume = e.target.value / 10 ;
-      
+        
+        props.audref.current.volume =e.target.value / 10 ;
+        
     }
-    
     return (
         <>
-       
-            {props.player ?  <input type="range" defaultValue={0} min={0} max={props.duration} value={props.current} onChange={dragHandler}/> :
-            <input defaultValue={0} type="range"  onChange={volumeHandler} min={0.0} max={10.0}/>
+            {props.player ?  <input type="range" min={0} max={props.duration ? props.duration : ''} value={props.current ? props.current : ''} onChange={dragHandler}/> :
+            <input type="range" ref={volumeRef} defaultValue={10} onChange={volumeHandler} min={0} max={10}/>
             }
-      
- 
    </>
     )
 }

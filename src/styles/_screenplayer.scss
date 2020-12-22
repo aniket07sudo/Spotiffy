@@ -1,10 +1,13 @@
 .screenplayer {
     background-color: #282828;
     grid-column: sidebar-start / navbar-end ;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    // display: flex;
+    // align-items: center;
+    // justify-content: space-between;
     padding: 0 1rem;
+    display: grid;
+    grid-template-columns: .7fr 1.2fr .7fr;
+    gap: 3rem;
 }
 .song-info {
     display: flex;
@@ -20,16 +23,15 @@
     // max-width: 17rem;
 }
 .player {
-    width: 22rem;
-    max-width: 47rem;
-   
+    width: 100%;
 }
 .nowplaying {
     display: flex;
- 
-    & > * {
-        margin-right: 1rem;
-    }
+    align-items: center;
+    gap: 1rem;
+    // & > * {
+    //     margin-right: 1rem;
+    // }
 }
 .song-img img {
     width: 3.5rem;
@@ -133,14 +135,17 @@ button {
 
 }
 .extra {
-   min-width: 16rem;
-
+   width: 100%;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
 }
 
 .extra-controls {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-end;
+    gap: 1rem;
     svg:hover  {
         fill: white;
         color: white;
@@ -245,4 +250,10 @@ input[type=range]::-webkit-progress-inner-value{
 .select-song {
     color: white;
     display: inline-block;
+}
+.v-hid {
+    display: none;
+}
+.player-progress {
+    width: 100%;
 }

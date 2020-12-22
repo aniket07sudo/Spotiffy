@@ -7,14 +7,11 @@ import {ReactComponent as Library} from '../Assets/library.svg';
 import {ReactComponent as Add} from '../Assets/add.svg';
 import {ReactComponent as Like} from '../Assets/like.svg';
 
-
-
 function Sidebar() {
 
     return (
        
         <div className="sidebar">
-          
             <div className="sidebar-wrapper">
                 <div className="logo-holder">
                 <img src={Logo} className="logo"/>
@@ -29,7 +26,6 @@ function Sidebar() {
                     <h5>PLAYLISTS</h5>
                     <li><NavLink to="/playlist"><div className="icon-wrapper"><Add className="playlist-icon"/></div>Create Playlists</NavLink></li>
                     <li><NavLink to="/collection"><div className="icon-wrapper gradient"><Like /></div>Liked Songs</NavLink></li>
-
                 </ul>
             </div>
          

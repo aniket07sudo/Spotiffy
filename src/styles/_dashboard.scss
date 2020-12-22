@@ -1,5 +1,15 @@
 .dashboard {
     display: grid;
     grid-template-columns: [sidebar-start] 15rem [sidebar-end navbar-start] 1fr [navbar-end];
-    grid-template-rows: 8vh 77.5vh 14.5vh;
+    grid-template-rows: 9.5vh 76vh 14.5vh;
+}
+.navigation {
+    width: 2rem;
+    height: 2rem;
+    background-color: rgba(0,0,0,0.6);
+}
+@media only screen and (min-height:618px) {
+    .dashboard {
+        grid-template-rows: 9.5vh 79vh 11.5vh;
+    }
 }

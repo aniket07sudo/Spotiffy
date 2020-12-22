@@ -5,37 +5,31 @@ import {ReactComponent as User} from '../Assets/user.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import card1 from '../Assets/card-1.jpg';
-import card2 from '../Assets/card-2.jfif';
 import { connect } from 'react-redux';
-import card3 from '../Assets/card-3.jpg';
 import {ReactComponent as Play} from '../Assets/play.svg';
 import {ReactComponent as Pause} from '../Assets/pause.svg';
-
+import Card from './card';
+import {ReactComponent as Spot} from '../Assets/spotarrow.svg';
 import { Link } from 'react-router-dom';
-import {initSongs , setCurrent , isPlaying , pauseExplicit , playExplicit } from '../store/actions/track';
-
+import {ReactComponent as Down} from '../Assets/userarrow.svg';
+import {initSongs , setCurrent , isPlaying , addQueue , initPlaylists , setActivePlaylist } from '../store/actions/track';
 
 function MainView(props) {
-
-  
     useEffect(() => {
         props.oninitSongs();
-      
+        props.oninitPlaylist();
     },[]);
+  
     const mainRef = useRef(null);
-    const change = () => {
-        console.log(mainRef.current.scrollTop);
-    }
+   
 
-    
     return(
         <>
-        <div className="mainArea nav-active">
+        <div className="mainArea" >
             <div className="main-head">
                 <div className="main-controls">
-                    <div ><FontAwesomeIcon icon={faAngleLeft} className="nav-control" /></div>
-                    <div><FontAwesomeIcon icon={faAngleRight} className="nav-control" /></div>
+                    <div className="navigation"><FontAwesomeIcon icon={faAngleLeft} className="nav-control" /></div>
+                    <div className="navigation"><FontAwesomeIcon icon={faAngleRight} className="nav-control" /></div>
                 </div>
                 <div className="main-right">
                     <button className="upgrade">
@@ -43,31 +37,33 @@ function MainView(props) {
                     </button>
                     <div className="user">
                         <User />
+                        <span>Aniket</span>
+                        <Down />
                     </div>
                 </div>
             </div>
             </div>
-            <div className="content-area" onScroll={change} ref={mainRef} >
+            <div className="content-area" ref={mainRef} >
                 <div className="content-top">
                 <h2>Recently Played</h2>
-                <Link className="see">See All</Link>
+                <Link to="/seeall" className="see">See All</Link>
                 </div>
                  <div className="music-cards">
+                    
                 {props.songs && props.songs.map(song  => (
-                        <div className={props.songid === song._id && props.isPlaying ? "music-card card-active" : "music-card"} key={song._id}>
+                      <div className={props.songid === song._id && props.isPlaying ? "music-card card-active" : "music-card"} key={song._id}>
                         <div className="music-card-content">
                             <div className="music-img-container">
                                 <div className="music-img">
                                 <img src={song.cover} alt="image" />
                                 </div>
                                 {props.songid === song._id && props.isPlaying ? 
-                                <div className="music-img-btn" onClick={() => props.isplaying(false)}>
+                                <span className="music-img-btn" onClick={() => props.isplaying(!props.isPlaying)}>
                                 <button><Pause /></button>
-                            </div> : 
-                            <div className="music-img-btn" onClick={() => props.onSetSong(song._id,song.name,song.author,song.movie,song.audio,song.cover)}>
+                            </span> : 
+                            <span className="music-img-btn" onClick={() => { props.onSetSong(song._id,song.name,song.author,song.movie,song.audio,song.cover); props.isplaying(!props.isPlaying)}}>
                             <button><Play /></button>
-                        </div>
-                        
+                        </span>
                             }
                           
                             </div>
@@ -76,53 +72,54 @@ function MainView(props) {
                              <span>{song.author}</span>
                         </div>
                         </div>
-                    </div>
+                    </div> 
                 ))}
-                    
-                  
                 </div>      
-                <div className="content-top">
+               
+            
+                 {/* {props.playlists && props.playlists.map(song  => (
+                        <div className={props.songid === song._id && props.isPlaying || props.activePlaylist === song._id ? "music-card card-active" : "music-card"} key={song._id}>
+                        <div className="music-card-content">
+                            <div className="music-img-container">
+                                <div className="music-img">
+                                {console.log(song.songs)}
+                                <img src={song.playCover} alt="image" />
+                                </div>
+                                {props.songid === song._id || props.activePlaylist === song._id && props.isPlaying ? 
+                                <div className="music-img-btn" onClick={() => props.isplaying(false)}>
+                                <button><Pause /></button>
+                            </div> : 
+                            <div className="music-img-btn" onClick={() => { props.setQueue(song.songs);props.onSetSong(song.songs[0]._id,song.songs[0].name,song.songs[0].author,song.songs[0].movie,song.songs[0].audio,song.songs[0].cover);props.onactivePlaylist(song._id) }}>
+                            <button><Play /></button>
+                        </div>
+                            }
+                            </div>
+                        <div className="music-card-footer">
+                            <p>{song.name}</p>
+                             <span>{song.author}</span>
+                        </div>
+                        </div>
+                    </div>
+                ))} */}
+               
+               <div className="content-top">
                     <div className="content-head">
-                    <h2>Shows to try</h2>
-                    <p>Podcasts we think you'll get hooked on.</p>
+                    <h2>Trending Playlists</h2>
+                    <p>Playlists we think you'll get hooked on.</p>
                     </div>
-                <Link className="see">See All</Link>
+                <Link to="/seall" className="see">See All</Link>
                 </div>
-                 <div className="music-cards">
-                    <div className="music-card">
-                        <div className="music-card-content">
-                            <div className="music-img-container">
-                                <div className="music-img">
-                                <img src={card3} alt="image" />
-                                </div>
-                                <div className="music-img-btn">
-                                    <button><Play /></button>
-                                </div>
-                            </div>
-                        <div className="music-card-footer">
-                            <p>Global Top 50</p>
-                            <span>Your daily update of the most played tracks right now.</span>
-                        </div>
-                        </div>
+                  <Card playlists={props.playlists}/>
+
+                  <div className="content-top">
+                    <div className="content-head">
+                    <h2>Trending Playlists</h2>
+                    <p>Playlists we think you'll get hooked on.</p>
                     </div>
-                    <div className="music-card">
-                        <div className="music-card-content">
-                            <div className="music-img-container">
-                                <div className="music-img">
-                                <img src={card1} alt="image" />
-                                </div>
-                                <div className="music-img-btn">
-                                    <button><Play /></button>
-                                </div>
-                            </div>
-                        <div className="music-card-footer">
-                            <p>Global Top 50</p>
-                            <span>Your daily update of the most played tracks right now.</span>
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div> 
+                <Link to="seall" className="see">See All</Link>
+                </div>
+                <Card playlists={props.trending} />
+             
             </div>
         
         </>
@@ -133,7 +130,10 @@ const mapStateToProps = state => {
     return {
         songs:state.tracks.songs,
         songid:state.tracks.activeSongid,
-        isPlaying:state.tracks.isPlaying
+        isPlaying:state.tracks.isPlaying,
+        playlists:state.tracks.playlists,
+        trending:state.tracks.trendingPlaylists,
+        activePlaylist:state.tracks.activePlaylist
     }
 }
 
@@ -142,8 +142,9 @@ const mapDispatchToProps = dispatch => {
         oninitSongs:() => dispatch(initSongs()),
         onSetSong:(currentSong,name,author,movie,audio,cover) => dispatch(setCurrent(currentSong,name,author,movie,audio,cover)),
         isplaying:(dec) => dispatch(isPlaying(dec)),
-        pauseSong:() => dispatch(pauseExplicit()),
-        playSong:() => dispatch(playExplicit())
+        setQueue:(song) => dispatch(addQueue(song)),
+        oninitPlaylist:() => dispatch(initPlaylists()),
+        onactivePlaylist:(songid) => dispatch(setActivePlaylist(songid))
     }
 }
 
