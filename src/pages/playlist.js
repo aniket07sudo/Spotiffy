@@ -203,9 +203,7 @@ class Playlist extends Component {
                 </div>
            </div>
            <div className="more">
-                <h2>More By {this.state.author} </h2>
-              
-                <Card playlists={this.state.moreSongs} moreSongs="true"/>
+                <Card playlists={this.state.moreSongs} head={`More By ${this.state.author}`} moreSongs="true" nosee/>
            </div>
             </div>      
             

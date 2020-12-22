@@ -21,7 +21,7 @@ function Card(props) {
                     <h2>{props.head}</h2>
                     <p>{props.subHead}</p>
                     </div>
-                <Link to="seall" className="see">See All</Link>
+                {props.nosee ? null :<Link to="seall" className="see">See All</Link>}
                 </div>
         <div className="music-cards">
             {props.moreSongs ?   
