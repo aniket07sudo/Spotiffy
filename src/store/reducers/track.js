@@ -32,7 +32,8 @@ const reducer = (state = initialState,action) => {
         case actionTypes.SET_SONGS:
             return {
                 ...state,
-                songs:action.songs
+                songs:action.songs,
+                loading:!state.loading
             }
         case actionTypes.SET_CURRENT:
             return {
@@ -85,7 +86,8 @@ const reducer = (state = initialState,action) => {
             return {
                 ...state,
                 playlists:action.playlistSong,
-                trendingPlaylists:action.trending
+                trendingPlaylists:action.trending,
+                loading:!state.loading
             }
         case actionTypes.SET_ACTIVE_PLAYLIST:
             return {
@@ -101,12 +103,12 @@ const reducer = (state = initialState,action) => {
             return {
                 ...state,
                 currentPlaylist:action.data.songs,
-                loading:!initialState.loading
+                loading:!state.loading
             }
         case actionTypes.LOAD:
             return {
                 ...state,
-                loading:!initialState.loading
+                loading:!state.loading
             }
 
         default: 

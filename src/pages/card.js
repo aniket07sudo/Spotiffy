@@ -15,6 +15,14 @@ function Card(props) {
     }
 
     return(
+        <>
+        <div className="content-top">
+                    <div className="content-head">
+                    <h2>{props.head}</h2>
+                    <p>{props.subHead}</p>
+                    </div>
+                <Link to="seall" className="see">See All</Link>
+                </div>
         <div className="music-cards">
             {props.moreSongs ?   
             props.playlists && props.playlists.map(song => (
@@ -70,6 +78,7 @@ function Card(props) {
         
   
      </div>
+     </>
     )
    
 }

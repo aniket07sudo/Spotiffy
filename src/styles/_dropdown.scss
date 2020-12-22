@@ -36,3 +36,16 @@
     border-bottom: 1px solid rgba(255,255,255,.1);
     margin-bottom: 0rem;
 }
+.main-loader {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+.loader-wrapper {
+    background-color: black;
+    height: 100%;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

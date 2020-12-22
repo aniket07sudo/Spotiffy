@@ -123,8 +123,8 @@ export const setLoad = () => {
 
 export const initSongs = () => {
     return dispatch => {
-   
-        axios.get("http://localhost:5000/songs").then(res => {
+        dispatch(setLoad());
+        axios.get("https://spottify.herokuapp.com/songs").then(res => {
             
             // dispatch(setCustom(res.data.songs,res.data.recommended));
             dispatch(setSongs(res.data.songs));
@@ -137,7 +137,8 @@ export const initSongs = () => {
 
 export const initPlaylists = () => {
     return dispatch => {
-        axios.get("http://127.0.0.1:5000/playlist").then(res => {
+        dispatch(setLoad());
+        axios.get("https://spottify.herokuapp.com/playlist").then(res => {
             // dispatch(setPlaylists(res.data.data.recommended));
             dispatch(setPlaylists(res.data.data.recommended,res.data.data.trending))
         }).catch(err => {

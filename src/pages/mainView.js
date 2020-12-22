@@ -12,7 +12,8 @@ import Card from './card';
 import {ReactComponent as Spot} from '../Assets/spotarrow.svg';
 import { Link } from 'react-router-dom';
 import {ReactComponent as Down} from '../Assets/userarrow.svg';
-import {initSongs , setCurrent , isPlaying , addQueue , initPlaylists , setActivePlaylist } from '../store/actions/track';
+import Loader from 'react-loader-spinner';
+import {initSongs , setCurrent , isPlaying , setLoad, addQueue , initPlaylists , setActivePlaylist } from '../store/actions/track';
 
 function MainView(props) {
     useEffect(() => {
@@ -21,8 +22,6 @@ function MainView(props) {
     },[]);
   
     const mainRef = useRef(null);
-   
-
     return(
         <>
         <div className="mainArea" >
@@ -43,7 +42,7 @@ function MainView(props) {
                 </div>
             </div>
             </div>
-            <div className="content-area" ref={mainRef} >
+            { props.loading ? <div className="loader-wrapper"><Loader className="main-loader" color="#1db954" /></div> :<div className="content-area" ref={mainRef} >
                 <div className="content-top">
                 <h2>Recently Played</h2>
                 <Link to="/seeall" className="see">See All</Link>
@@ -101,26 +100,10 @@ function MainView(props) {
                         </div>
                     </div>
                 ))} */}
-               
-               <div className="content-top">
-                    <div className="content-head">
-                    <h2>Trending Playlists</h2>
-                    <p>Playlists we think you'll get hooked on.</p>
-                    </div>
-                <Link to="/seall" className="see">See All</Link>
-                </div>
-                  <Card playlists={props.playlists}/>
-
-                  <div className="content-top">
-                    <div className="content-head">
-                    <h2>Trending Playlists</h2>
-                    <p>Playlists we think you'll get hooked on.</p>
-                    </div>
-                <Link to="seall" className="see">See All</Link>
-                </div>
-                <Card playlists={props.trending} />
+                  {/* <Card playlists={props.playlists}/> */}
+                <Card playlists={props.trending} head="Trending Playlists" subHead="Playlists we think you'll get hooked on." />
              
-            </div>
+            </div> }
         
         </>
     )  
@@ -133,7 +116,8 @@ const mapStateToProps = state => {
         isPlaying:state.tracks.isPlaying,
         playlists:state.tracks.playlists,
         trending:state.tracks.trendingPlaylists,
-        activePlaylist:state.tracks.activePlaylist
+        activePlaylist:state.tracks.activePlaylist,
+        loading:state.tracks.loading
     }
 }
 
@@ -144,7 +128,8 @@ const mapDispatchToProps = dispatch => {
         isplaying:(dec) => dispatch(isPlaying(dec)),
         setQueue:(song) => dispatch(addQueue(song)),
         oninitPlaylist:() => dispatch(initPlaylists()),
-        onactivePlaylist:(songid) => dispatch(setActivePlaylist(songid))
+        onactivePlaylist:(songid) => dispatch(setActivePlaylist(songid)),
+        load:() => dispatch(setLoad())
     }
 }
 

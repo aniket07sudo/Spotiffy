@@ -64,17 +64,17 @@ class Playlist extends Component {
     //     }
     // }
  componentDidMount() {
-    this.navDiv.current.style.background = this.state.color;
-    
-    this.albumHeader.current.style.background = `linear-gradient(${this.state.color} 0% , black 190%`;
-    this.albumList.current.style.background = `linear-gradient(to bottom , ${this.state.color} -141% , rgba(0,0,0,0))`;
-        axios.get(`http://localhost:5000${this.props.location.pathname}`).then(res => {
-          
+    this.props.load();
+        axios.get(`https://spottify.herokuapp.com${this.props.location.pathname}`).then(res => {
+            this.props.load();
             this.setState({songs:res.data.playlist.songs,name:res.data.playlist.name,playCover:res.data.playlist.playCover,author:res.data.playlist.author,year:res.data.playlist.year,totalsong:res.data.playlist.totalsong,totalduration:res.data.playlist.totalDuration,moreSongs:res.data.morePlaylist,id:res.data.playlist.id,color:res.data.playlist.color,secondary:res.data.playlist.secondary});
         }).catch(err => {
             console.log(err);
         })
-     
+        this.navDiv.current.style.background = this.state.color;
+    
+        this.albumHeader.current.style.background = `linear-gradient(${this.state.color} 0% , black 190%`;
+        this.albumList.current.style.background = `linear-gradient(to bottom , ${this.state.color} -141% , rgba(0,0,0,0))`;
  }
     change = () => {
      if(this.navRef.current.scrollTop > 350) {
@@ -99,9 +99,13 @@ class Playlist extends Component {
     }
 
     render() {
-    
+        let icon=null;
+        if(this.props.loading) {
+           icon = ( <div className="loader-wrapper"><Loader className="main-loader" color="#1db954" /></div> )
+        }
     return(
         <>
+       
         <div className="mainArea" ref={this.navDiv} style={{backgroundColor:this.state.color}} >
         <div className="main-head" >
             <div className="main-controls">
@@ -142,7 +146,9 @@ class Playlist extends Component {
             </div>
         </div>
         </div>
+        
         <div className="content-area" onScroll={this.change} ref={this.navRef}>
+        {icon}
             <div className="album-header" ref={this.albumHeader} style={{background:`linear-gradient(${this.state.color} 0% , black 190%`}}>
             <img src={this.state.playCover} className="album-photo"/>
             <div className="album-details">
