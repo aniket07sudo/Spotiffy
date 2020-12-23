@@ -16,7 +16,7 @@ function Player(props) {
     }
     return (
         <>
-            {props.player ?  <input type="range" min={0} max={props.duration ? props.duration : ''} value={props.current ? props.current : ''} onChange={dragHandler}/> :
+            {props.player ?  <input type="range" min={0} max={props.duration ? props.duration : ''} value={props.current ? props.current : 0} onChange={dragHandler}/> :
             <input type="range" ref={volumeRef} defaultValue={10} onChange={volumeHandler} min={0} max={10}/>
             }
    </>
